@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import PageTemplate from "../components/templateMovieListPage";
 import Spinner from "../components/spinner";
-import PlaylistAddIcon from "../components/cardIcons/playlistAdd";
+import PlaylistAddIcon from "../components/cardIcons/playlistAdd"; // Ensure correct import path
 import { getUpcomingMovies } from "../api/tmdb-api";
 
 const UpcomingMoviesPage = () => {
@@ -20,7 +20,7 @@ const UpcomingMoviesPage = () => {
   }
 
   const movies = data.results;
-  
+
   return (
     <PageTemplate
       title="Upcoming Movies"
