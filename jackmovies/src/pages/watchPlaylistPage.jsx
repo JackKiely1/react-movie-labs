@@ -4,7 +4,7 @@ import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "@tanstack/react-query";
 import { getMovie } from "../api/tmdb-api";
 import Spinner from '../components/spinner';
-
+import RemoveFromWatchList from "../components/cardIcons/removeFromWatchList";
 
 
 
@@ -26,7 +26,6 @@ const WatchPlaylistPage = () => {
       return <Spinner />; // Show spinner while movies are loading
     }
   
-    // Map query results to movie data
     const movies = watchlistMovieQueries.map((q) => {
       q.data.genre_ids = q.data.genres.map((g) => g.id);
       return q.data;
@@ -38,6 +37,7 @@ const WatchPlaylistPage = () => {
         movies={movies}
         action={(movie) => (
           <>
+          <RemoveFromWatchList movie={movie} />
           </>
         )}
       />
