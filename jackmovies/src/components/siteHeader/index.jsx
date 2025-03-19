@@ -14,6 +14,18 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
+const CustomAppBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: "#6A1B9A" //Adjusted Site Header to purple
+}));
+
+const CustomTypography = styled(Typography)(({theme}) => ({
+  fontWeight: "600", //Adjusted fontWeight
+  letterSpacing: "0.5px", //Adjusted for better spacing 
+}));
+
+
+
+
 const SiteHeader = ({ history }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -27,7 +39,7 @@ const SiteHeader = ({ history }) => {
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favorites" },
     { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Option 4", path: "/" },
+    { label: "Top Rated", path: "/movies/topRated" },
   ];
 
   const handleMenuSelect = (pageURL) => {
@@ -40,11 +52,11 @@ const SiteHeader = ({ history }) => {
 
   return (
     <>
-      <AppBar position="fixed" color="secondary">
+      <CustomAppBar position="fixed" color="secondary">
         <Toolbar>
-          <Typography variant="h4" sx={{ flexGrow: 1 }}>
+          <CustomTypography variant="h5" sx={{ flexGrow: 1 }}>
             TMDB Client
-          </Typography>
+          </CustomTypography>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             All you ever wanted to know about Movies!
           </Typography>
@@ -78,7 +90,9 @@ const SiteHeader = ({ history }) => {
                     <MenuItem
                       key={opt.label}
                       onClick={() => handleMenuSelect(opt.path)}
+
                     >
+                      
                       {opt.label}
                     </MenuItem>
                   ))}
@@ -98,7 +112,7 @@ const SiteHeader = ({ history }) => {
               </>
             )}
         </Toolbar>
-      </AppBar>
+      </CustomAppBar>
       <Offset />
     </>
   );

@@ -59,12 +59,17 @@ export default function FilterMoviesCard(props) {
   return (
     <Card 
       sx={{
-        backgroundColor: "rgb(204, 204, 0)"
+        backgroundColor: "rgb(30, 30, 30)", //Dark background
+        color: "rgb(255, 255, 255)", // Text color on bottom to white
+        borderRadius: "12px", //Rounded Corners
+        padding: "20px", //better spacing between image and card
+        maxWidth: "500px", //keep the filter section compact
+        margin: "auto", //have everything centered
       }} 
       variant="outlined">
       <CardContent>
-        <Typography variant="h5" component="h1">
-          <SearchIcon fontSize="large" />
+        <Typography variant="h5" component="h1" sx = {{textAlign: "center"}}> 
+          <SearchIcon fontSize="medium" />
           Filter the movies.
         </Typography>
         <TextField
@@ -89,7 +94,7 @@ export default function FilterMoviesCard(props) {
 
             {genres.map((genre) => {
               return (
-                <MenuItem key={genre.id} value={genre.id}>
+                <MenuItem key={genre.id} value={genre.id} >
                   {genre.name}
                 </MenuItem>
               );
@@ -97,6 +102,7 @@ export default function FilterMoviesCard(props) {
           </Select>
         </FormControl>
       </CardContent>
+
       <CardMedia
         sx={{ height: 300 }}
         image={img}
