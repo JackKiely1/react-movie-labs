@@ -20,7 +20,7 @@ import { MoviesContext } from "../../contexts/moviesContext";
 
 export default function MovieCard({ movie, action }) {
 
-  const { favorites, addToFavorites } = useContext(MoviesContext);
+  const { favorites, addToFavorites, } = useContext(MoviesContext);
 
   if (favorites.find((id) => id === movie.id)) {
     movie.favorite = true;
@@ -44,6 +44,7 @@ export default function MovieCard({ movie, action }) {
             </Avatar>
           ) : null
         }
+        
         title={
           <Typography variant="h5" component="p">
             {movie.title}{" "}
@@ -78,6 +79,8 @@ export default function MovieCard({ movie, action }) {
       <CardActions disableSpacing>
       
         {action(movie)}
+
+    
       
         <Link to={`/movies/${movie.id}`}>
           <Button variant="outlined" size="medium" color="primary">
