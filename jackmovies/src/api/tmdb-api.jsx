@@ -123,7 +123,5 @@ export const getMovie = (args) => {
       });
   };
 
-
-
   
   
