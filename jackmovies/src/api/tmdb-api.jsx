@@ -122,6 +122,21 @@ export const getMovie = (args) => {
         throw error;
       });
   };
-
   
+  export const getMovieRecommendation = async (movieId) => {
+    if (!movieId) throw new Error("Invalid movie ID");
+  
+    const response = await fetch(
+      ` https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+    );
+  
+    if (!response.ok) {
+      throw new Error("Failed to fetch movie recommendations");
+    }
+  
+    return response.json();
+  };
+  
+
+ 
   
