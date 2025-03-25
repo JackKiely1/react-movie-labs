@@ -55,7 +55,6 @@ export default function FilterMoviesCard(props) {
   };
 
 
-
   return (
     <Card 
       sx={{
@@ -101,6 +100,7 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
+
       </CardContent>
 
       <CardMedia

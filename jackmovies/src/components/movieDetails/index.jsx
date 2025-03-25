@@ -166,7 +166,7 @@ const MovieDetails = ({ movie }) => {
       <Typography variant="h5" component="h3">
   Recommended Movies
 </Typography>
-<MovieRecommendations movieId={movie.id} />  {/* ✅ Pass movieId */}
+<MovieRecommendations movieId={movie.id} />  {}
 
 
       <Fab
