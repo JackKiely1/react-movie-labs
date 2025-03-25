@@ -15,103 +15,119 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const CustomAppBar = styled(AppBar)(({ theme }) => ({
-  backgroundColor: "#6A1B9A" //Adjusted Site Header to purple
+  backgroundColor: "#6A1B9A"
 }));
 
-const CustomTypography = styled(Typography)(({theme}) => ({
-  fontWeight: "600", //Adjusted fontWeight
-  letterSpacing: "0.5px", //Adjusted for better spacing 
+const CustomTypography = styled(Typography)(({ theme }) => ({
+  fontWeight: "600",
+  letterSpacing: "0.5px",
 }));
 
-
-
-
-const SiteHeader = ({ history }) => {
+const SiteHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const [homeMenuEl, setHomeMenuEl] = useState(null);
+  const [playlistMenuEl, setPlaylistMenuEl] = useState(null);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  
   const navigate = useNavigate();
-
-  const menuOptions = [
-    { label: "Home", path: "/" },
-    { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Top Rated", path: "/movies/topRated" },
-    { label: "Watchlist", path: "/movies/watchlist" },
-    { label: "Favorites", path: "/movies/favorites" },
-  ];
 
   const handleMenuSelect = (pageURL) => {
     navigate(pageURL, { replace: true });
-  };
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
+    setHomeMenuEl(null);
+    setPlaylistMenuEl(null);
   };
 
   return (
     <>
       <CustomAppBar position="fixed" color="secondary">
         <Toolbar>
-          <CustomTypography variant="h5" sx={{ flexGrow: 1 }}>
+          <CustomTypography variant="h5" sx={{ flexGrow: 1, cursor: "pointer" }} onClick={() => navigate("/")} >
             TMDB Client
           </CustomTypography>
+
+
+
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             All you ever wanted to know about Movies!
           </Typography>
-            {isMobile ? (
-              <>
-                <IconButton
-                  aria-label="menu"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={open}
-                  onClose={() => setAnchorEl(null)}
-                >
-                  {menuOptions.map((opt) => (
-                    <MenuItem
-                      key={opt.label}
-                      onClick={() => handleMenuSelect(opt.path)}
 
-                    >
-                      
-                      {opt.label}
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </>
-            ) : (
-              <>
-                {menuOptions.map((opt) => (
-                  <Button
-                    key={opt.label}
-                    color="inherit"
-                    onClick={() => handleMenuSelect(opt.path)}
-                  >
-                    {opt.label}
-                  </Button>
-                ))}
-              </>
-            )}
+          {isMobile ? (
+            <>
+              <IconButton
+                aria-label="menu"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={(e) => setAnchorEl(e.currentTarget)}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={() => setAnchorEl(null)}
+              >
+                <MenuItem onClick={() => handleMenuSelect("/")}>Home</MenuItem>
+                <MenuItem onClick={() => handleMenuSelect("/movies/upcoming")}>
+                  Upcoming
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuSelect("/movies/topRated")}>
+                  Top Rated
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuSelect("/movies/watchlist")}>
+                  Watchlist
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuSelect("/movies/favorites")}>
+                  Favorites
+                </MenuItem>
+              </Menu>
+            </>
+          ) : (
+            <>
+              {/* New Home dropdown */}
+              <Button
+                color="inherit"
+                onClick={(e) => setHomeMenuEl(e.currentTarget)}
+              >
+                Home
+              </Button>
+              <Menu
+                anchorEl={homeMenuEl}
+                open={Boolean(homeMenuEl)}
+                onClose={() => setHomeMenuEl(null)}
+              >
+                <MenuItem onClick={() => handleMenuSelect("/")}>Home</MenuItem>
+                <MenuItem onClick={() => handleMenuSelect("/movies/upcoming")}>
+                  Upcoming
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuSelect("/movies/topRated")}>
+                  Top Rated
+                </MenuItem>
+              </Menu>
+
+              {/* New Playlist Dropdown */}
+              <Button
+                color="inherit"
+                onClick={(e) => setPlaylistMenuEl(e.currentTarget)}
+              >
+                Playlists
+              </Button>
+              <Menu
+                anchorEl={playlistMenuEl}
+                open={Boolean(playlistMenuEl)}
+                onClose={() => setPlaylistMenuEl(null)}
+              >
+                <MenuItem onClick={() => handleMenuSelect("/movies/watchlist")}>
+                  Watchlist
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuSelect("/movies/favorites")}>
+                  Favorites
+                </MenuItem>
+              </Menu>
+            </>
+          )}
         </Toolbar>
       </CustomAppBar>
       <Offset />
