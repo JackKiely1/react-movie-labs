@@ -4,12 +4,12 @@ import PageTemplate from "../components/templateMovieListPage";
 import Spinner from "../components/spinner";
 import PlaylistAddIcon from "../components/cardIcons/playlistAdd";
 import AddToFavoritesIcon from '../components/cardIcons/addtoFavorites';
-import { getTopRated } from "../api/tmdb-api";
+import { getPopular } from "../api/tmdb-api";
 
-const TopRatedPage = () => {
+const PopularPage = () => {
   const { data, error, isPending, isError } = useQuery({
-    queryKey: ["top_rated"],
-    queryFn: getTopRated,
+    queryKey: ["popular"],
+    queryFn: getPopular,
   });
 
   if (isPending) {
@@ -24,7 +24,7 @@ const TopRatedPage = () => {
 
   return (
     <PageTemplate
-      title="Top Rated"
+      title="Popular"
       movies={movies}
       action={(movie) => <>
       <PlaylistAddIcon movie={movie} />
@@ -35,4 +35,4 @@ const TopRatedPage = () => {
   );
 };
 
-export default TopRatedPage;
+export default PopularPage;

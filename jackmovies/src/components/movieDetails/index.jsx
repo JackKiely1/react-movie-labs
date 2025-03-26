@@ -109,6 +109,9 @@ import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
 import MovieRecommendations from "../movieRecommendations"; // New movie Reccomendations import 
+import MovieVideo from "../movieVideo"; // New movie video import
+
+
 
 const root = {
     display: "flex",
@@ -161,6 +164,13 @@ const MovieDetails = ({ movie }) => {
           </li>
         ))}
       </Paper>
+
+
+      {/*New Movie Trailers Section*/}
+      <Typography variant="h5" component="h3">
+        Movie Trailers
+      </Typography>
+      <MovieVideo movieId={movie.id} />
 
       {/*New Movie Recommendations Section*/}
       <Typography variant="h5" component="h3">

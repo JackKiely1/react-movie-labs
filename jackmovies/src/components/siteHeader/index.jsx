@@ -33,7 +33,7 @@ const SiteHeader = () => {
   const navigate = useNavigate();
 
   const handleMenuSelect = (pageURL) => {
-    navigate(pageURL, { replace: true });
+    navigate(pageURL);
     setHomeMenuEl(null);
     setPlaylistMenuEl(null);
   };
@@ -76,6 +76,9 @@ const SiteHeader = () => {
                 <MenuItem onClick={() => handleMenuSelect("/movies/topRated")}>
                   Top Rated
                 </MenuItem>
+                <MenuItem onClick={() => handleMenuSelect("/movies/popular")}>
+                  Popular
+                </MenuItem>
                 <MenuItem onClick={() => handleMenuSelect("/movies/watchlist")}>
                   Watchlist
                 </MenuItem>
@@ -104,6 +107,9 @@ const SiteHeader = () => {
                 </MenuItem>
                 <MenuItem onClick={() => handleMenuSelect("/movies/topRated")}>
                   Top Rated
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuSelect("/movies/popular")}>
+                  Popular
                 </MenuItem>
               </Menu>
 
